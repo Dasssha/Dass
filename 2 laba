@@ -1,0 +1,194 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {   //1a
+            int pone = 1;
+            float ptwo = 3;
+            char pthree = 'd';
+            string pfour = "super";
+            bool pfave = true;
+            long pseven = 1;
+            byte peight = 1;
+            double pnine = 1.56;
+            short pten = 1;
+            //1b
+            pten += peight;
+            pseven += peight;
+            pnine += pone;
+            pone += pthree;
+            ptwo += pone;
+            //явное:
+            pnine += (double)peight;
+            pone += (int)ptwo;
+            pthree += (char)peight;
+            pseven += (long)pthree;
+            ptwo += (float)pnine;
+            //1c
+            {
+                object obj = pone; //упаковка значения переменной в объект
+                int x = (int)obj;// распаковываем (по ссылке obj,в переменную типа int)
+                Console.WriteLine(x);
+            }
+            //1d
+            {
+                var name = "Dasha";
+                Type nameType = name.GetType();
+                Console.WriteLine("Тип name: {0}", nameType);
+            }
+            //1e
+            {
+                int? a = null, b = 2, c = 9;
+                Console.WriteLine(a ?? b ?? c);
+                int? x = null;
+                int y = x ?? 18;
+                Console.WriteLine(y);
+            }
+            //2a
+            string str1 = "sandra";
+            string str2 = "san";
+            int resultat1 = String.Compare(str1, str2);
+            Console.WriteLine("Результат сравнения строк1: " + resultat1);//положительное,ecли str1>str2
+            string str3 = "san";
+            string str4 = "sandra";
+            int resultat2 = String.Compare(str3, str4);
+            Console.WriteLine("Результат сравнения строк2: " + resultat2);
+            string str13 = "san";
+            string str24 = "san";
+            int resultat12 = String.Compare(str13, str24);
+            Console.WriteLine("Результат сравнения строк2: " + resultat12);//отрицательное,ecли str13<str24
+
+            //2b
+            string str5 = "первое действие ";
+            string str6 = "второе действие ";
+            string str7 = " Красивая девочка ";
+            string sceplenie = String.Concat(str5, str6);
+            Console.WriteLine("Результат сцепления: ", sceplenie);
+            string podstroka = str7.Substring(6);
+            Console.WriteLine("Подстрока: " + podstroka);
+            string str8 = String.Copy(str5);
+            Console.WriteLine("Копия строки:  " + str7);
+            string razdelenie = "Самая красивая девочка";
+            string[] words = razdelenie.Split(' ');
+            Console.WriteLine("Разделенная строка: ");
+            foreach (string word in words)//отображение разделения в массиве
+            {
+                Console.WriteLine(word);
+            }
+            str5 = str5.Insert(7, str7);
+            Console.WriteLine("Вставки подстроки в заданную позицию: " + str5);
+            razdelenie = razdelenie.Remove(6);
+            Console.WriteLine("Новая строка: " + razdelenie);
+            //2c
+            string pusto = "";
+            string nullstr = null;
+            int len = pusto.Length;
+            Console.WriteLine("Длина пустой строки: " + len);
+            //2d
+            StringBuilder str9 = new StringBuilder("girl", 25);
+            Console.WriteLine(str9);
+            str9.Append("SUPER");//добавляем в конец строки символы
+            Console.WriteLine(str9);
+            str9.Remove(1, 5);
+            Console.WriteLine(str9);
+            //3a
+            int[,] arrey1 = new int[4, 4] { { 5, 1, 7, 3}, { 6, 9, 9, 5 }, { 5, 0, 0, 0 }, { 8, 2, 6, 4 } };
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    Console.Write(arrey1[i, j] + "  ");
+                }
+                Console.Write("\n");
+            }
+            //3b
+            int[] arrey2 = new int[] { 1, 3, 0, 9, 7, 5, 2 };
+            int line = arrey2.Length;
+            Console.WriteLine("Длина массива " + line + " символа:");
+            foreach (int x in arrey2)
+            {
+                Console.Write(x + "  ");
+            }
+            Console.WriteLine("\nВведите индекс элемента, который хотите изменить:");
+            int in1 = Convert.ToInt32(Console.ReadLine());
+            string[] arrey3 = new string[] { "один", "два", "три", "четыре", "пять", "шесть"};//меняем произвольный элемент
+            Console.WriteLine("Введите значение:");
+            string in2 = Console.ReadLine();
+            arrey3[in1] = in2;
+            Console.WriteLine("Измененный массив строк длиной " + line + " символов:");
+            foreach (string x in arrey3)
+            {
+                Console.Write(x + "   ");
+            }
+            //3c
+            int[][] arrey4 = new int[3][];
+            arrey4[0] = new int[2];
+            arrey4[1] = new int[3];
+            arrey4[2] = new int[4];
+            for (int x = 0; x < 3; x++)
+            {
+                arrey4[0][x] = x;
+                for (int y = 0; y < arrey4[x].Length; y++)
+                {
+                    Console.WriteLine("\nВведите элемент массива: ");
+                    arrey4[x][y] = Convert.ToInt32(Console.ReadLine());
+                }
+                for (x = 0; x < 3; x++)
+                {
+                    for (int y = 0; y < arrey4[x].Length; y++)
+                    {
+                        Console.Write(arrey4[x][y] + "  ");
+
+                    }
+                    Console.Write("\n");
+                }
+                //3d
+                int[] arr = new int[] { 1, 3 };//неявно типизированные переменные для хранения массива и строки.
+                var peremen = arr;
+                String peremen2 = "yes";
+                var strvar = peremen2;
+                //4-1
+                var korteg = Tuple.Create(pone, pfour, pthree, pfour, pseven);
+                Console.WriteLine(korteg);
+                Console.WriteLine(korteg.Item1);
+                Console.WriteLine(korteg.Item3);
+                Console.WriteLine(korteg.Item4);
+                char ttt = (char)korteg.Item3;//распаковка
+                int t = 1, t2 = 2, t3 = 3, t4 = 5, t5 = 8, t6 = 9; ;
+                var korteg2 = Tuple.Create(t, t2, t3);
+                var korteg3 = Tuple.Create(t4, t5, t6);
+                if (korteg2 == korteg3)
+                {
+                    Console.WriteLine("Кортежи равны");
+                }
+                else
+                {
+                    Console.WriteLine("Кортежи не равны");
+                }
+
+            }
+
+        }
+        static Tuple<int, int, int, char> bla(string h, int[] b)
+        {
+            int min = 0, max = 0, sum = 0; char d;
+            foreach (int t in b)
+            {
+                if (t > max) { max = t; }
+                if (t < min) { min = t; }
+                sum += t;
+
+            }
+            d = h[0];
+            var s = Tuple.Create<int, int, int, char>(min, max, sum, d);
+            return s;
+        }
+    }
+}
